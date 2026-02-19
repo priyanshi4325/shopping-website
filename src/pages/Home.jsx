@@ -89,7 +89,7 @@ export default function Home() {
     if (loading) return <Loader />
     if (error) return <ErrorState />
 
-    let filteredProducts = products.filter((product) => product.title.toLowerCase().includes(searchTerm.toLowerCase()));
+    let filteredProducts = products.filter((product) => state.searchTerm.length >= 3 ? product.title.toLowerCase().includes(searchTerm.toLowerCase()) : true);
 
     if (category != "all") {
         filteredProducts = filteredProducts.filter((product) => product.category === category)

@@ -1,6 +1,17 @@
 import StarRating from "./StarRating"
+import { useContext } from "react"
+import { CartContext } from "../context/CartContext"
 
 export default function ProductCard({ product }) {
+    const {dispatch} = useContext(CartContext)
+
+    function handleAddToCart(){
+        dispatch({
+            type: "ADD_TO_CART",
+            payload: product
+        })
+    }
+
     return (
         <>
             <div className="product-card">
@@ -11,8 +22,8 @@ export default function ProductCard({ product }) {
 
                 <StarRating rating={product.rating}/>
 
-                <button disabled={product.stock === 0}>
-                    {product.stock === 0 ? "Out of Stock" : "Add to Cart"}
+                <button onClick={handleAddToCart}>
+                    Add to Cart
                 </button>
             </div>
         </>
